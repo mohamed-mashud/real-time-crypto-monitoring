@@ -11,7 +11,7 @@ export const loginHandler : any = async (req: Request, res: Response) => {
             return res.status(400).json({ message: "Email doesnt exists" });
         if(emailExists.password != password)
             return res.status(400).json({ message: "Password is incorrect" });
-        
+        // console.log("user logged in");    
         return res.json({ message: "Login successful" });
     } catch (error) {
         console.log(`Error during login: ${error}`);
