@@ -32,9 +32,9 @@ export const checkPriceLimitHandler: any = async (req: Request, res: Response) =
             return res.json({ message: "Price is not Updated" })
 
         let message, within = false; 
-        if(current_price > upperLimit) 
+        if(current_price >= upperLimit) 
             message =  `Price of ${coinId} is over the limit`
-        else if(current_price < lowerLimit) 
+        else if(current_price <= lowerLimit) 
             message = `Price of ${coinId} is below the limit`
         else {
             within = true;
