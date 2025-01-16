@@ -4,6 +4,17 @@ import { Request, Response } from "express";
 import { redis } from "../index";
 dotenv.config();
 
+/**
+ * this endpoint caches data for every 60 seconds, thus making 
+ * the response time much faster and quick data reterivals,
+ * when there is no cached data, it loops through the coins 
+ * array and checks for any coin_id which limit set on them
+ * 
+ * If there is a limit, it passes onto another endpoint for 
+ * checking limit is high or low or within the limit,
+ * if there is no limit, it returns the data directly
+ * 
+ */
 export const getCoinsPriceHandler : any = async (req: Request, res: Response) => {
     const cachedCoinPrices = await redis.get("cachedCoinPrices");
 

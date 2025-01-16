@@ -1,6 +1,17 @@
 import { redis } from "../index"
 import { Request, Response } from "express"
+import { alert } from "../routes/alert";
 
+
+/**
+ * requires coinId, current_price, last_updated_at_from_api 
+ * 
+ * if the value is exceeded or gone under the limit
+ * it will add upto to the alert array messages and 
+ * removes the key from the redis client  
+ * 
+ * if its within no changes occurs
+ */
 export const checkPriceLimitHandler: any = async (req: Request, res: Response) => {
     const { coinId, current_price, last_updated_at_from_api } = req.body;
     if (!coinId) 
@@ -30,14 +41,13 @@ export const checkPriceLimitHandler: any = async (req: Request, res: Response) =
             message = `Price of ${coinId} is within`
         }
         if(!within) {
+            alert.push(message);
             await redis.del(key)
             .then(() => console.log(key , "deleted"));
-            
         }
 
         return res.status(200).json({ message })
     } catch (error) {
-
         console.error(`Error in checking price limit for ${coinId}`);
         return res.status(500).json({ message: "Internal Server Error in checking price limit" })
     }

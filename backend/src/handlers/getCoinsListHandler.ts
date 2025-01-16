@@ -3,6 +3,10 @@ import { Request, Response } from "express";
 import dotenv from "dotenv";
 dotenv.config();
 
+
+/**
+ * returns all the available coins id with prices and last updated data 
+ */
 export const getCoinsListHandler : any = async (req: Request, res: Response) => {
     try {
         const response = await axios.get(`${process.env.COIN_API_ROOT_URL}/coins/list`);
