@@ -65,7 +65,7 @@ export const getCoinsPriceHandler : any = async (req: Request, res: Response) =>
             })
             
             // cached for 60 seconds 
-            await redis.set("cachedCoinPrices", dataToBeCached, "EX", 10); 
+            await redis.set("cachedCoinPrices", dataToBeCached, "EX", 60); 
             return res.status(200).json(response.data);
         } catch (error) {
             console.error(error);

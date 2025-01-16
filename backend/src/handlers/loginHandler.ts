@@ -8,9 +8,9 @@ export const loginHandler : any = async (req: Request, res: Response) => {
     try {
         const emailExists = await Users.findOne({ email: email });
         if(!emailExists)
-            return res.status(400).json({ message: "Email doesnt exists" });
+            return res.json({ message: "Email doesnt exists" });
         if(emailExists.password != password)
-            return res.status(400).json({ message: "Password is incorrect" });
+            return res.json({ message: "Password is incorrect" });
         // console.log("user logged in");    
         return res.json({ message: "Login successful" });
     } catch (error) {

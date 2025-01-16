@@ -7,7 +7,7 @@ export const registerHandler : any = async (req: Request, res: Response) => {
     const password = req.body.password;
 
     if (!email || !username || !password) {
-        res.status(400).send("Missing required fields email or username or password");
+        res.status(401).send("Missing required fields email or username or password");
         return;
     }
 

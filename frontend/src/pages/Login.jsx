@@ -33,6 +33,7 @@ export default function Login({onLogin}) {
             password: password
         })
         const data = response.data;
+        console.log(data);
         return data;
     }
     return (
