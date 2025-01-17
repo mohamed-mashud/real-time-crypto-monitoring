@@ -39,7 +39,8 @@ cryptoRouter.post("/setlimit", setPriceLimitHandler);
  *  "current_price" : 290995,
  *  "last_updated_at_from_api" : 1737031837
  * }
+ * later converted it into a function to avoid axios calls
  */
-cryptoRouter.post("/checklimit", checkPriceLimitHandler);
+// cryptoRouter.post("/checklimit", checkPriceLimitHandler);
 
 export default cryptoRouter;
